@@ -1,5 +1,6 @@
 # Loops and lists
 #! Loops in Python (Data Science)
+import random
 
 # Looping through a range with a for loop
 print("For Loop with range:")
@@ -7,7 +8,8 @@ for i in range(1, 6):  # range(1, 6) means 1 to 5
     print(f"Iteration {i}")
 
 # List of fruits
-fruits = ["apple",
+fruits = [
+    "apple",
     "blueberry",
     "cantaloupe",
     "cherry",
@@ -21,11 +23,12 @@ fruits = ["apple",
     "pineapple",
     "raspberry",
     "strawberry",
-    "tangerine",]
+    "tangerine",
+]
 
 print("\nFor Loop through a list:")
 for fruit in fruits:
-    if len(fruit) == 5:  
+    if len(fruit) == 5:
         print(f"Found 5-letter fruit: {fruit}")
     else:
         print(f"Fruit: {fruit}")
@@ -131,7 +134,7 @@ fruits = [
     "tangerine",
 ]
 
-print("How many items in fruits: ",len(fruits))
+print("How many items in fruits: ", len(fruits))
 #! other methods and operations on list object named 'fruits' with 'string' instances
 # 1. Accessing elements
 print("First fruit:", fruits[0])  # Access the first item
@@ -211,3 +214,122 @@ print("Copied list:", fruits_copy)
 # 16. Clearing the list
 fruits.clear()  # Remove all items from the list
 print("Cleared list:", fruits)
+
+#! appending to treats an empty list
+treats = []
+
+for fruit in fruits:
+    if "berry" in fruit:
+        treats.append(fruit + " jam")
+    elif fruit[0] == "p":
+        treats.append(fruit + " popsicle")
+    elif len(fruit) <= 5:
+        treats.append(fruit + " jelly")
+    else:
+        treats.append(fruit + " jellybean")
+
+print("The new list of treats are:")
+for treat in treats:
+    print(treat)
+
+#! import the random for random global module
+import random
+
+#! using the zip global method through an array using the function!
+students = [
+    "Amy",
+    "Ben",
+    "Cal",
+    "Dan",
+    "Eli",
+    "Fay",
+    "Guo",
+    "Hal",
+    "Ida",
+    "Jed",
+    "Ken",
+    "Les",
+    "Moe",
+]
+
+
+def generate_sat_score():
+    return random.randint(40, 80) * 10
+
+
+math_scores = [generate_sat_score() for _ in students]
+verbal_scores = [generate_sat_score() for _ in students]
+
+for student, math, verbal in zip(students, math_scores, verbal_scores):
+    print(f"{student}: Math: {math}, Verbal: {verbal}")
+
+#! Lottery powerball NYC 1-292 million chance of winning
+import random
+
+player = ["Nuraly"]
+
+
+def generate_full_powerball_ticket():
+    main_numbers = sorted(random.sample(range(1, 70), 5))
+    powerball = random.randint(1, 26)
+    return main_numbers, powerball
+
+
+ticket = [generate_full_powerball_ticket() for _ in player]
+
+for player, (main_numbers, powerball) in zip(player, ticket):
+    print(f"{player}: Main Numbers: {main_numbers}, Powerball: {powerball}")
+
+#! Creating a dictionary and important methods and operations in a dictionary
+student_grades = {"Amy": 90, "Ben": 85, "Cal": 92}
+
+# Accessing a value using its key
+print(student_grades["Amy"])  # Output: 90
+
+# Adding a new key-value pair
+student_grades["Dan"] = 88
+
+# Updating an existing key's value
+student_grades["Ben"] = 89
+print(student_grades)  # Output: {'Amy': 90, 'Ben': 89, 'Cal': 92, 'Dan': 88}
+
+# Removing an entry using 'del'
+del student_grades["Cal"]
+
+# Removing an entry using 'pop()'
+removed_value = student_grades.pop("Ben")
+print(student_grades)  # Output: {'Amy': 90, 'Dan': 88}
+print(removed_value)  # Output: 89
+
+# Checking if a key exists
+if "Amy" in student_grades:
+    print("Amy's grade is recorded.")  # Output: Amy's grade is recorded
+
+# Iterating through dictionary keys
+for student in student_grades:
+    print(student)  # Output: Amy, Dan
+
+# Iterating through dictionary values
+for grade in student_grades.values():
+    print(grade)  # Output: 90, 88
+
+# Iterating through dictionary keys and values
+for student, grade in student_grades.items():
+    print(f"{student}: {grade}")  # Output: Amy: 90, Dan: 88
+
+# Using 'get()' method to avoid KeyError
+print(student_grades.get("Eli", "No grade"))  # Output: No grade
+
+# Display dictionary keys
+print(student_grades.keys())  # Output: dict_keys(['Amy', 'Dan'])
+
+# Display dictionary values
+print(student_grades.values())  # Output: dict_values([90, 88])
+
+# Display dictionary key-value pairs
+print(student_grades.items())  # Output: dict_items([('Amy', 90), ('Dan', 88)])
+
+# Merging another dictionary with 'update()'
+new_grades = {"Ben": 82, "Cal": 91}
+student_grades.update(new_grades)
+print(student_grades)  # Output: {'Amy': 90, 'Dan': 88, 'Ben': 82, 'Cal': 91}
